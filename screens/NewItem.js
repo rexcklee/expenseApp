@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Text,
   View,
@@ -8,21 +8,21 @@ import {
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
-import {useForm, Controller} from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import SelectDropdown from 'react-native-select-dropdown';
 import DatePicker from 'react-native-date-picker';
 import SQLite from 'react-native-sqlite-storage';
 
-    const db = SQLite.openDatabase(
-    {name: 'Expenses', location: 'default'},
-    () => {
-      console.log('Database connected')
-    },
-    error => console.log('Database error: ', error)
-  );  
+const db = SQLite.openDatabase(
+  { name: 'Expenses', location: 'default' },
+  () => {
+    console.log('Database connected')
+  },
+  error => console.log('Database error: ', error)
+);
 
-const NewItem = ({navigation, route}) => {
+const NewItem = ({ navigation, route }) => {
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState(null);
@@ -45,7 +45,7 @@ const NewItem = ({navigation, route}) => {
     control,
     handleSubmit,
     reset,
-    formState: {errors}
+    formState: { errors }
   } = useForm({
     // default values of the new item form, and form will reset to default values after submit
     defaultValues: {
@@ -70,7 +70,7 @@ const NewItem = ({navigation, route}) => {
         },
       );
     });
-  }, []);  
+  }, []);
 
   useEffect(() => {
     if (
@@ -108,7 +108,7 @@ const NewItem = ({navigation, route}) => {
                   onPress: () => navigation.navigate('Summary'),
                 },
               ],
-              {cancelable: false},
+              { cancelable: false },
             );
           } else Alert.alert('Registration Failed');
         },
@@ -116,7 +116,7 @@ const NewItem = ({navigation, route}) => {
     });
   };
 
-  
+
 
   const handleDateConfirm = date => {
     setOpen(false);
@@ -127,12 +127,12 @@ const NewItem = ({navigation, route}) => {
   return (
     <View className="flex-1 relative bg-white">
       <ScrollView
-      className="bg-red-100"
+        className="bg-test1-background"
         showsVerticalScrollIndicator={false}
         alwaysBounceVertical={false}
         contentContainerStyle={styles.scrollViewContainer}>
         <SelectDropdown
-        className="bg-white rounded-full my-5"
+          className="bg-white rounded-full my-5"
           data={categories}
           onSelect={(selectedItem, index) => {
             setCategory(selectedItem);
@@ -170,7 +170,7 @@ const NewItem = ({navigation, route}) => {
         />
 
         <TextInput
-        className="bg-white rounded-full mt-5"
+          className="bg-white rounded-full mt-5"
           placeholder="Amount"
           onChangeText={price => setPrice(price)}
           value={price}
@@ -179,7 +179,7 @@ const NewItem = ({navigation, route}) => {
         />
 
         <TouchableOpacity
-        className="bg-white rounded-full mt-5"
+          className="bg-white rounded-full mt-5"
           title="Date"
           onPress={() => setOpen(true)}
           style={styles.inputDateStyle}>
@@ -204,7 +204,7 @@ const NewItem = ({navigation, route}) => {
           className="rounded-full mt-5"
           disabled={submitDisable}
           style={{
-            backgroundColor: (submitDisable)? '#dedede':'#f5a9e2',
+            backgroundColor: (submitDisable) ? '#dedede' : '#f5a9e2',
             height: 60,
             width: '80%',
             justifyContent: 'center',
@@ -221,39 +221,39 @@ const NewItem = ({navigation, route}) => {
 export default NewItem;
 
 const styles = StyleSheet.create({
-   scrollViewContainer: {
+  scrollViewContainer: {
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
     paddingVertical: '10%',
     paddingBottom: '20%',
-  }, 
+  },
   dropdown2BtnStyle: {
     width: '80%',
     height: 50,
     backgroundColor: '#ffffff',
     borderRadius: 50,
   },
-   dropdown2BtnTxtStyle: {
+  dropdown2BtnTxtStyle: {
     color: '#000000',
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 18,
-  }, 
-   dropdown2DropdownStyle: {
+  },
+  dropdown2DropdownStyle: {
     backgroundColor: '#444',
     borderTopLeftRadius: 12,
     borderTopRightRadius: 12,
     borderBottomLeftRadius: 12,
     borderBottomRightRadius: 12,
-  }, 
+  },
   dropdown2RowTxtStyle: {
     color: '#FFF',
     textAlign: 'center',
     fontWeight: 'bold',
   },
 
-   inputTextStyle: {
+  inputTextStyle: {
     marginTop: 20,
     paddingLeft: 10,
     width: '80%',
@@ -263,7 +263,7 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'center',
-  }, 
+  },
   inputDateStyle: {
     marginTop: 20,
     justifyContent: 'center',
